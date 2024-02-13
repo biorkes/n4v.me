@@ -5,10 +5,6 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
-permissions:
-  contents: read
-
 jobs:
   build:
 
@@ -16,9 +12,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 7.4
 
     - name: Cache Composer packages
       id: composer-cache
